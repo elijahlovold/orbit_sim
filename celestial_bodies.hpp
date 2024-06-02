@@ -5,7 +5,8 @@
 #include <vector>
 #include <math.h>
 #include <string>
-// #include <cblas.h>
+#include <thread>
+#include <chrono>
 
 #define G 6.67430e-11   // Gravitational constant (m^3 kg^-1 s^-2)
 #define c 299792458     // Speed of light (m/s)
@@ -41,6 +42,9 @@ enum cel_type {
 
 class celestial {
     public: 
+        static constexpr int rec_decmi = 100;    // how many samples to decimate before recording
+        static constexpr double ep = 1000;
+ 
         cel_type type;
         std::string name;
         std::string color;
@@ -67,18 +71,16 @@ class celestial {
         void set_xyz(double set_x, double set_y, double set_z); 
         void set_dxyzdt(double dx_dt, double dy_dt, double dz_dt);
 
-        private: 
-            static constexpr int rec_decmi = 100;    // how many samples to decimate before recording
-            static constexpr double ep = 1000;
-            // static constexpr double ep = 100;
+    private: 
+        // static constexpr double ep = 100;
 
-            double dx_dt;
-            double dy_dt;
-            double dz_dt;
+        double dx_dt;
+        double dy_dt;
+        double dz_dt;
 
-            double dx2_2dt;
-            double dy2_2dt;
-            double dz2_2dt;
+        double dx2_2dt;
+        double dy2_2dt;
+        double dz2_2dt;
 
 };
 
